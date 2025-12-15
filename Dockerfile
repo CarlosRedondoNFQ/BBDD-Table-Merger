@@ -10,6 +10,17 @@ COPY requirements.txt .
 # Instala las dependencias de la aplicación
 RUN pip install --no-cache-dir -r requirements.txt
 
+
+
+# Descarga el modelo durante el build
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
+
+# Fuerza modo offline en runtime (opcional pero recomendable)
+ENV HF_HUB_DISABLE_TELEMETRY=1
+ENV TRANSFORMERS_OFFLINE=1
+ENV HF_DATASETS_OFFLINE=1
+
+
 # Copia el código fuente de la aplicación al contenedor
 COPY . .
 

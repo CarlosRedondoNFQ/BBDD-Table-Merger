@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @st.cache_resource(show_spinner=False)
 def load_sentence_transformer():
     try:
-        model = SentenceTransformer('all-MiniLM-L6-v2')
+        model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
         return model
     except Exception as e:
         logger.error("Failed to load SentenceTransformer model", exc_info=True)
